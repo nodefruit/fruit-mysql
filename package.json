@@ -1,0 +1,25 @@
+{
+  "name": "fruit-mysql",
+  "version": "0.0.0",
+  "description": "MySQL Fruit ORM adapter",
+  "main": "fruit-mysql.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nodefruit/fruit-mysql.git"
+  },
+  "keywords": [
+    "fruit",
+    "orm",
+    "mysql",
+    "sql"
+  ],
+  "author": "Khalid REHIOUI <Array.prototype@gmail.com> (http://github.com/javascipt)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nodefruit/fruit-mysql/issues"
+  },
+  "homepage": "https://github.com/nodefruit/fruit-mysql#readme"
+}
