@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/nodefruit/fruit-mysql/issues"
   },
-  "homepage": "https://github.com/nodefruit/fruit-mysql#readme"
+  "homepage": "https://github.com/nodefruit/fruit-mysql#readme",
+  "dependencies": {
+    "mysql": "^2.9.0"
+  }
 }
