@@ -46,7 +46,7 @@ module.exports = (function () {
     }
     
     this.insert = function (tableName, data, callBack) {
-      var query = generateInsertQuery(tableName, data.slice(0));
+      var query = generateInsertQuery(tableName, data);
       exec(query, function (err, results) {
         callBack(err, err ? undefined : {
             result : {
