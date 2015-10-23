@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/nodefruit/fruit-mysql#readme",
   "dependencies": {
-    "mysql": "^2.9.0"
+    "mysql": "^2.9.0",
+    "sql-query": "^0.1.26"
   }
 }
