@@ -15,19 +15,6 @@ module.exports = (function () {
     });
   }
   
-  function generateInsertQuery (tableName, data) {
-    var sqlQuery  = sql.Query()
-      , sqlInsert = sqlQuery.insert()
-    if(Array.isArray(data)) {
-      var values = data.slice(0);
-      return values.reduce(function (query, record) {
-        return query + ' , ' + sqlInsert.into(tableName).set(record).build().split('VALUES').pop();
-      }, sqlInsert.into(tableName).set(values.shift()).build())
-    } else {
-      return sqlInsert.into(tableName).set(data).build();
-    }
-  }
-  
   function DataManager () {
     
     this.type = 'mysql';
@@ -45,16 +32,44 @@ module.exports = (function () {
       return this;
     }
     
-    this.insert = function (tableName, data, callBack) {
-      var query = generateInsertQuery(tableName, data);
+    function generateInsertQuery (tableName, data) {
+      var sqlQuery  = sql.Query()
+        , sqlInsert = sqlQuery.insert()
+      if(Array.isArray(data)) {
+        var values = data.slice(0);
+        return values.reduce(function (query, record) {
+          return query + ' , ' + sqlInsert.into(tableName).set(record).build().split('VALUES').pop();
+        }, sqlInsert.into(tableName).set(values.shift()).build())
+      } else {
+        return sqlInsert.into(tableName).set(data).build();
+      }
+    }
+
+    function generateInsertQueries (tableName, data) {
+      var sqlQuery  = sql.Query()
+        , sqlInsert = sqlQuery.insert();
+      return data.reduce(function (queries, values, index) {
+        queries.push(sqlInsert.into(tableName).set(values).build());
+        queries.push("SELECT @ids := CONCAT(CONCAT(@ids, ','), LAST_INSERT_ID()) FROM " + tableName + " LIMIT 1")
+        if (index + 1 == data.length ) {
+          queries.push("SELECT @ids AS ids FROM " + tableName + " LIMIT 1");
+        }
+        return queries;
+      }, ["SET @ids = ''"]).join(';\n');
+    }
+    
+    this.insert = function (tableName, data, callBack, returnIds) {
+      var isOneId = !(Array.isArray(data) && returnIds)
+        , query   = ( isOneId ? generateInsertQuery : generateInsertQueries)(tableName, data);
       exec(query, function (err, results) {
+        if(!err) results = (isOneId ? results: results.pop().pop().ids.split(',').slice(1).map(Number));
         callBack(err, err ? undefined : {
             result : {
                 success       : true
-              , affectedCount : results.affectedRows
-              , count         : results.affectedRows
+              , affectedCount : isOneId ? results.affectedRows : results.length
+              , count         : isOneId ? results.affectedRows : results.length
             }
-          , insertedId : [ results.insertId]
+          , insertedId : isOneId ? [results.insertId] : results
         })
       });
     }
