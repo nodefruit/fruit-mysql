@@ -86,7 +86,7 @@ module.exports = (function () {
       exec(query, function (err, results) {
         callBack(err, results)
       });
-    }    
+    }
     
     this.findOne = function (tableName, condition, callBack) {
       var sqlQuery  = sql.Query()
@@ -96,7 +96,31 @@ module.exports = (function () {
       exec(query, function (err, results) {
         callBack(err, results.shift())
       });
-    }    
+    }
+    
+    function update (one, tableName, data, condition, callBack) {
+      var sqlQuery  = sql.Query()
+        , sqlUpdate = sqlQuery.update()
+        , query     = sqlUpdate.into(tableName).set(data).where(condition).build() + (one ? ' LIMIT 1 ' : '');
+      
+      exec(query, function (err, results) {
+        callBack(err, err ? undefined : {
+          results : {
+              success       : true
+            , count         : results.affectedRows
+            , affectedCount : results.changedRows
+          }
+        })
+      });
+    }
+    
+    this.update = function (tableName, data, condition, callBack) {
+      update (true, tableName, data, condition, callBack);
+    }
+    
+    this.updateAll = function (tableName, data, condition, callBack) {
+      update (false, tableName, data, condition, callBack);
+    }
     
   }
   
