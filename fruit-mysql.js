@@ -122,6 +122,32 @@ module.exports = (function () {
       update (false, tableName, data, condition, callBack);
     }
     
+    
+    function del (one, tableName, condition, callBack) {
+      var sqlQuery      = sql.Query()
+        , sqlDelete     = sqlQuery.remove()
+        , unbuiltQuery  = sqlDelete.from(tableName).where(condition)
+        , query         = (one ? unbuiltQuery.limit(1) : unbuiltQuery).build();
+      
+      exec(query, function (err, results) {
+        callBack(err, err ? undefined : {
+          results : {
+              success       : true
+            , count         : results.affectedRows
+            , affectedCount : results.affectedRows
+          }
+        })
+      });
+    }
+    
+    this.delete = function (tableName, condition, callBack) {
+      del (true, tableName, condition, callBack);
+    }
+    
+    this.deleteAll = function (tableName, condition, callBack) {
+      del (false, tableName, condition, callBack);
+    }
+    
   }
   
   return new DataManager;
