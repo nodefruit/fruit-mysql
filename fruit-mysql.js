@@ -78,10 +78,13 @@ module.exports = (function () {
       this.find(tableName, {}, callBack);
     }
     
-    this.find = function (tableName, condition, callBack) {
+    this.find = function (tableName, condition, callBack, limit, offset) {
       var sqlQuery  = sql.Query()
         , sqlSelect = sqlQuery.select()
         ,  query    = sqlSelect.from(tableName).select().where(condition).build();
+      
+      if(limit)   query += ' LIMIT '  + limit;
+      if(offset)  query += ' OFFSET ' + offset;
       
       exec(query, function (err, results) {
         callBack(err, results)
