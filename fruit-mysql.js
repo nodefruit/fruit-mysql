@@ -20,7 +20,7 @@ module.exports = (function () {
     this.type = 'mysql';
     
     this.connect = function (conf, callBack) {
-      var config = conf;
+      config = conf;
       exec('SELECT 1 + 1 AS solution', function (err) {
         callBack(err);
       })
