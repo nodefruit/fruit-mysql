@@ -18,8 +18,7 @@ describe('Connexion to the database', function () {
   });
 })
 
-
-describe ('Creating a table for test', function () {
+describe('Creating a table for test', function () {
   var success = false;
   
   beforeEach(function (done) {
@@ -36,5 +35,91 @@ describe ('Creating a table for test', function () {
   
   it('should create the table successfully', function () {
     assert.equal(success, true);
+  });
+});
+
+describe('Successfully inserting a recored', function () {
+  var results = {}
+    , error   = null
+    , data    = {
+        name  : 'khalid'
+      , age   : 26
+    }
+  
+  beforeEach(function (done) {
+    adapter.insert(tableName, data, function (err, rst) {
+      error   = err;
+      results = rst;
+      done();
+    });
+  });
+  
+  it('it should insert successfully', function () {
+    assert.equal(error, null);
+    assert.equal(results.result.success, true);
+    assert.equal(results.result.affectedCount, 1);
+    assert.equal(results.result.count, 1);
+    assert.equal(results.insertedId.length, 1);
+  });
+});
+
+describe('Successfully inserting many records', function () {
+  var results = {}
+    , error   = null
+    , data    = [
+      {
+          name  : 'Ahmed'
+        , age   : 40
+      },
+      {
+          name  : 'Abdullah'
+        , age   : 30
+      }
+    ];
+  
+  beforeEach(function (done) {
+    adapter.insert(tableName, data, function (err, rst) {
+      error   = err;
+      results = rst;
+      done();
+    });
+  });
+  
+  it('it should insert successfully', function () {
+    assert.equal(error, null);
+    assert.equal(results.result.success, true);
+    assert.equal(results.result.affectedCount, 2);
+    assert.equal(results.result.count, 2);
+  });
+});
+
+describe('Successfully inserting many records with ids returned (mysql only)', function () {
+  var results = {}
+    , error   = null
+    , data    = [
+      {
+          name  : 'Omar'
+        , age   : 31
+      },
+      {
+          name  : 'Othmane'
+        , age   : 32
+      }
+    ];
+  
+  beforeEach(function (done) {
+    adapter.insert(tableName, data, function (err, rst) {
+      error   = err;
+      results = rst;
+      done();
+    }, true);
+  });
+  
+  it('it should insert successfully', function () {
+    assert.equal(error, null);
+    assert.equal(results.result.success, true);
+    assert.equal(results.result.affectedCount, 2);
+    assert.equal(results.result.count, 2);
+    assert.equal(results.insertedId.length, 2);
   });
 });
