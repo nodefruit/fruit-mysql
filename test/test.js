@@ -99,11 +99,11 @@ describe('Successfully inserting many records with ids returned (mysql only)', f
     , data    = [
       {
           name  : 'Omar'
-        , age   : 31
+        , age   : 30
       },
       {
           name  : 'Othmane'
-        , age   : 32
+        , age   : 30
       }
     ];
   
@@ -166,6 +166,109 @@ describe('Unsuccessful insertion due to incorrect data', function () {
   it('should not insert', function () {
     assert.equal(result, null);
     assert.equal(error, true);
+  });
+});
+
+describe('Successfully selecting data', function () {
+  var error     = false
+    , result    = null
+    , condition = {
+        name    : 'khalid'
+      , age     : 26
+    };
+
+  beforeEach(function (done) {
+    adapter.find(tableName, condition, function (err, rst) {
+      error   = err;
+      result  = rst;
+      done();
+    });
+  });
+  
+  it('should find a user with the same name and age', function () {
+    assert.equal(result.length, 1);
+    assert.equal(result[0].name, condition.name);
+    assert.equal(result[0].age, condition.age);
+    assert.equal(error, null);
+  });
+});
+
+describe('Successfully selecting data with limit', function () {
+  var error     = false
+    , result    = null
+    , condition = { age: 30 };
+
+  beforeEach(function (done) {
+    adapter.find(tableName, condition, function (err, rst) {
+      error   = err;
+      result  = rst;
+      done();
+    }, 2);
+  });
+  
+  it('should find a user with the same name and age', function () {
+    assert.equal(result.length, 2);
+    assert.equal(result[0].age, condition.age);
+    assert.equal(result[1].age, condition.age);
+    assert.equal(error, null);
+  });
+});
+
+describe('Successfully selecting data with limit and offset', function () {
+  var error     = false
+    , result    = null
+    , condition = { age: 30 };
+
+  beforeEach(function (done) {
+    adapter.find(tableName, condition, function (err, rst) {
+      error   = err;
+      result  = rst;
+      done();
+    }, 1, 1);
+  });
+  
+  it('should find a user with the same name and age', function () {
+    assert.equal(result.length, 1);
+    assert.equal(result[0].age, condition.age);
+    assert.equal(error, null);
+  });
+});
+
+describe('Successfully selecting one record', function () {
+  var error     = false
+    , result    = null
+    , condition = { age: 30 };
+
+  beforeEach(function (done) {
+    adapter.findOne(tableName, condition, function (err, rst) {
+      error   = err;
+      result  = rst;
+      done();
+    });
+  });
+  
+  it('should find a user with the same name and age', function () {
+    assert.equal(result.age, condition.age);
+    assert.equal(error, null);
+  });
+});
+
+describe('Successfully selecting all data', function () {
+  var error     = false
+    , result    = null
+    , condition = { age: 30 };
+
+  beforeEach(function (done) {
+    adapter.findAll(tableName, function (err, rst) {
+      error   = err;
+      result  = rst;
+      done();
+    });
+  });
+  
+  it('should find a user with the same name and age', function () {
+    assert.equal(result.length, 5);
+    assert.equal(error, null);
   });
 });
 
