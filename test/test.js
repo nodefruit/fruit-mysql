@@ -520,6 +520,88 @@ describe('successful updateAll query with 0 affected row', function () {
   });  
 });
 
+describe('unsuccessful update query due to inexisting table', function () {
+  var error     = false
+    , result    = null
+    , table     = 'user_' + Math.random().toString(36).substring(7)
+    , data      = { name : 'KHALID' }
+    , condition = { name : 'khalid' }
+  
+  beforeEach(function (done) {
+    adapter.update(table, data, condition, function (err, rst) {
+      result  = rst;
+      error   = !!err;
+      done();
+    });
+  });
+  
+  it('should return an error', function () {
+    assert.equal(error, true);
+    assert.equal(result, null);
+  });  
+});
+
+describe('unsuccessful update query due to incorrect data', function () {
+  var error     = false
+    , result    = null
+    , data      = { myname : 'KHALID' }
+    , condition = { name : 'khalid' }
+  
+  beforeEach(function (done) {
+    adapter.update(tableName, data, condition, function (err, rst) {
+      result  = rst;
+      error   = !!err;
+      done();
+    });
+  });
+  
+  it('should return an error', function () {
+    assert.equal(error, true);
+    assert.equal(result, null);
+  });  
+});
+
+describe('unsuccessful updateAll query due to inexisting table', function () {
+  var error     = false
+    , result    = null
+    , table     = 'user_' + Math.random().toString(36).substring(7)
+    , data      = { name : 'KHALID' }
+    , condition = { name : 'khalid' }
+  
+  beforeEach(function (done) {
+    adapter.updateAll(table, data, condition, function (err, rst) {
+      result  = rst;
+      error   = !!err;
+      done();
+    });
+  });
+  
+  it('should return an error', function () {
+    assert.equal(error, true);
+    assert.equal(result, null);
+  });  
+});
+
+describe('unsuccessful updateAll query due to incorrect data', function () {
+  var error     = false
+    , result    = null
+    , data      = { myname : 'KHALID' }
+    , condition = { name : 'khalid' }
+  
+  beforeEach(function (done) {
+    adapter.updateAll(tableName, data, condition, function (err, rst) {
+      result  = rst;
+      error   = !!err;
+      done();
+    });
+  });
+  
+  it('should return an error', function () {
+    assert.equal(error, true);
+    assert.equal(result, null);
+  });  
+});
+
 describe('Dropping the table', function () {
   var success = false;
   
