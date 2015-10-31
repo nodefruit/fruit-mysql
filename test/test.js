@@ -602,6 +602,48 @@ describe('unsuccessful updateAll query due to incorrect data', function () {
   });  
 });
 
+describe('successful delete query', function () {
+  var result    = null
+    , error     = null
+    , condition = { name : 'KHALID' }
+  
+  beforeEach(function (done) {
+    adapter.delete(tableName, condition, function (err, rst) {
+      result  = rst;
+      error   = !!err;
+      done();
+    });
+  });
+  
+  it('should delete one user successfully', function () {
+    assert.equal(error, false);
+    assert.equal(result.results.success, true);
+    assert.equal(result.results.count, 1);
+    assert.equal(result.results.affectedCount, 1);
+  });
+});
+
+describe('successful deleteAll query', function () {
+  var result    = null
+    , error     = null
+    , condition = {}
+  
+  beforeEach(function (done) {
+    adapter.deleteAll(tableName, condition, function (err, rst) {
+      result  = rst;
+      error   = !!err;
+      done();
+    });
+  });
+  
+  it('should delete all the users successfully', function () {
+    assert.equal(error, false);
+    assert.equal(result.results.success, true);
+    assert.equal(result.results.count, 4);
+    assert.equal(result.results.affectedCount, 4);
+  });
+});
+
 describe('Dropping the table', function () {
   var success = false;
   
