@@ -206,7 +206,28 @@ describe('Successfully selecting data with limit', function () {
     }, 2);
   });
   
-  it('should find a user with the same name and age', function () {
+  it('should find 2 users with the same age', function () {
+    assert.equal(result.length, 2);
+    assert.equal(result[0].age, condition.age);
+    assert.equal(result[1].age, condition.age);
+    assert.equal(error, null);
+  });
+});
+
+describe('Successfully selecting data with an offset', function () {
+  var error     = false
+    , result    = null
+    , condition = { age: 30 };
+
+  beforeEach(function (done) {
+    adapter.find(tableName, condition, function (err, rst) {
+      error   = err;
+      result  = rst;
+      done();
+    }, null, 1);
+  });
+  
+  it('should find 2 users with the same age starting from offset 1', function () {
     assert.equal(result.length, 2);
     assert.equal(result[0].age, condition.age);
     assert.equal(result[1].age, condition.age);
@@ -227,7 +248,7 @@ describe('Successfully selecting data with limit and offset', function () {
     }, 1, 1);
   });
   
-  it('should find a user with the same name and age', function () {
+  it('should find only one user with the same age starting from offset 1', function () {
     assert.equal(result.length, 1);
     assert.equal(result[0].age, condition.age);
     assert.equal(error, null);
@@ -247,7 +268,7 @@ describe('Successfully selecting one record', function () {
     });
   });
   
-  it('should find a user with the same name and age', function () {
+  it('should find only one user', function () {
     assert.equal(result.age, condition.age);
     assert.equal(error, null);
   });
@@ -255,8 +276,7 @@ describe('Successfully selecting one record', function () {
 
 describe('Successfully selecting all data', function () {
   var error     = false
-    , result    = null
-    , condition = { age: 30 };
+    , result    = null;
 
   beforeEach(function (done) {
     adapter.findAll(tableName, function (err, rst) {
@@ -266,7 +286,7 @@ describe('Successfully selecting all data', function () {
     });
   });
   
-  it('should find a user with the same name and age', function () {
+  it('should find all 5 inserted users', function () {
     assert.equal(result.length, 5);
     assert.equal(error, null);
   });

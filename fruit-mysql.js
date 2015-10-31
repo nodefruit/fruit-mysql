@@ -84,7 +84,10 @@ module.exports = (function () {
         ,  query    = sqlSelect.from(tableName).select().where(condition).build();
       
       if(limit)   query += ' LIMIT '  + limit;
-      if(offset)  query += ' OFFSET ' + offset;
+      if(offset)  {
+        if(!limit) query += ' LIMIT 18446744073709551610 '
+        query += ' OFFSET ' + offset;
+      }
       
       exec(query, function (err, results) {
         callBack(err, results)
