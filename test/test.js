@@ -432,6 +432,94 @@ describe('unsuccessful count query due to inexisting table', function () {
   });  
 });
 
+describe('successful update query', function () {
+  var error     = false
+    , result    = null
+    , data      = { name : 'KHALID' }
+    , condition = { name : 'khalid' }
+  
+  beforeEach(function (done) {
+    adapter.update(tableName, data, condition, function (err, rst) {
+      result  = rst;
+      error   = !!err;
+      done();
+    });
+  });
+  
+  it('should update first user with name khalid', function () {
+    assert.equal(error, false);
+    assert.equal(result.results.success, true);
+    assert.equal(result.results.count, 1);
+    assert.equal(result.results.affectedCount, 1);
+  });  
+});
+
+describe('successful update query with 0 affected rows', function () {
+  var error     = false
+    , result    = null
+    , data      = { name : 'KHALID' }
+    , condition = { name : 'KHALID' }
+  
+  beforeEach(function (done) {
+    adapter.update(tableName, data, condition, function (err, rst) {
+      result  = rst;
+      error   = !!err;
+      done();
+    });
+  });
+  
+  it('should update but no affected rows', function () {
+    assert.equal(error, false);
+    assert.equal(result.results.success, true);
+    assert.equal(result.results.count, 1);
+    assert.equal(result.results.affectedCount, 0);
+  });  
+});
+
+describe('successful updateAll query', function () {
+  var error     = false
+    , result    = null
+    , data      = { age : 50 }
+    , condition = { age : 30 }
+  
+  beforeEach(function (done) {
+    adapter.updateAll(tableName, data, condition, function (err, rst) {
+      result  = rst;
+      error   = !!err;
+      done();
+    });
+  });
+  
+  it('should update all users with age 30', function () {
+    assert.equal(error, false);
+    assert.equal(result.results.success, true);
+    assert.equal(result.results.count, 3);
+    assert.equal(result.results.affectedCount, 3);
+  });  
+});
+
+describe('successful updateAll query with 0 affected row', function () {
+  var error     = false
+    , result    = null
+    , data      = { age : 50 }
+    , condition = { age : 50 }
+  
+  beforeEach(function (done) {
+    adapter.updateAll(tableName, data, condition, function (err, rst) {
+      result  = rst;
+      error   = !!err;
+      done();
+    });
+  });
+  
+  it('should update all users with age 30', function () {
+    assert.equal(error, false);
+    assert.equal(result.results.success, true);
+    assert.equal(result.results.count, 3);
+    assert.equal(result.results.affectedCount, 0);
+  });  
+});
+
 describe('Dropping the table', function () {
   var success = false;
   
