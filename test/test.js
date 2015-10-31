@@ -123,3 +123,23 @@ describe('Successfully inserting many records with ids returned (mysql only)', f
     assert.equal(results.insertedId.length, 2);
   });
 });
+
+describe('Dropping the table', function () {
+  var success = false;
+  
+  beforeEach(function (done) {
+    var mysql       = require('mysql')
+      , connection  = mysql.createConnection(config)
+      , query       = 'DROP TABLE `' + tableName + '`';
+    
+    connection.connect();
+    connection.query(query, function(err) {
+      success = !err;
+      done();
+    });
+  });
+  
+  it('should drop the table successfully', function () {
+    assert.equal(success, true);
+  });
+});
