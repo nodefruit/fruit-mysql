@@ -100,7 +100,7 @@ module.exports = (function () {
         ,  query    = sqlSelect.from(tableName).select().where(condition).limit(1).build();
       
       exec(query, function (err, results) {
-        callBack(err, results.shift())
+        callBack(err, err ? null : results.shift())
       });
     }
     

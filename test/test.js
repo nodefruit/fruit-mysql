@@ -292,6 +292,107 @@ describe('Successfully selecting all data', function () {
   });
 });
 
+describe('Unsuccessful find query due to inexisting table', function () {
+  var error   = false
+    , result  = false
+    , table   = 'user_' + Math.random().toString(36).substring(7);
+  
+  beforeEach(function (done) {
+    adapter.find(table, {}, function (err, rst) {
+      error   = !!err;
+      result  = !!rst;
+      done();
+    });
+  });
+  
+  it('should return an error', function () {
+    assert.equal(error, true);
+    assert.equal(result, false);
+  });
+});
+
+describe('Unsuccessful find query due to incorrect condition', function () {
+  var error     = false
+    , result    = false
+    , condition = {
+        myname  : 'khalid'
+      , myage   : 26
+    };
+  
+  beforeEach(function (done) {
+    adapter.find(tableName, condition, function (err, rst) {
+      error   = !!err;
+      result  = !!rst;
+      done();
+    });
+  });
+  
+  it('should return an error', function () {
+    assert.equal(error, true);
+    assert.equal(result, false);
+  });
+});
+
+describe('Unsuccessful findOne query due to inexisting table', function () {
+  var error   = false
+    , result  = false
+    , table   = 'user_' + Math.random().toString(36).substring(7);
+  
+  beforeEach(function (done) {
+    adapter.findOne(table, {}, function (err, rst) {
+      error   = !!err;
+      result  = !!rst;
+      done();
+    });
+  });
+  
+  it('should return an error', function () {
+    assert.equal(error, true);
+    assert.equal(result, false);
+  });
+});
+
+describe('Unsuccessful findOne query due to incorrect condition', function () {
+  var error     = false
+    , result    = false
+    , condition = {
+        myname  : 'khalid'
+      , myage   : 26
+    };
+  
+  beforeEach(function (done) {
+    adapter.findOne(tableName, condition, function (err, rst) {
+      error   = !!err;
+      result  = !!rst;
+      done();
+    });
+  });
+  
+  it('should return an error', function () {
+    assert.equal(error, true);
+    assert.equal(result, false);
+  });
+});
+
+describe('Unsuccessful findAll query due to inexisting table', function () {
+  var error   = false
+    , result  = false
+    , table   = 'user_' + Math.random().toString(36).substring(7);
+  
+  beforeEach(function (done) {
+    adapter.findAll(table, function (err, rst) {
+      error   = !!err;
+      result  = !!rst;
+      done();
+    });
+  });
+  
+  it('should return an error', function () {
+    assert.equal(error, true);
+    assert.equal(result, false);
+  });
+});
+
 describe('Dropping the table', function () {
   var success = false;
   
