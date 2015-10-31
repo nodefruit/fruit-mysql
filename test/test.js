@@ -38,7 +38,7 @@ describe('Creating a table for test', function () {
   });
 });
 
-describe('Successfully inserting a recored', function () {
+describe('Successfully inserting a row', function () {
   var results = {}
     , error   = null
     , data    = {
@@ -63,7 +63,7 @@ describe('Successfully inserting a recored', function () {
   });
 });
 
-describe('Successfully inserting many records', function () {
+describe('Successfully inserting many rows', function () {
   var results = {}
     , error   = null
     , data    = [
@@ -93,7 +93,7 @@ describe('Successfully inserting many records', function () {
   });
 });
 
-describe('Successfully inserting many records with ids returned (mysql only)', function () {
+describe('Successfully inserting many rows with ids returned (mysql only)', function () {
   var results = {}
     , error   = null
     , data    = [
@@ -255,7 +255,7 @@ describe('Successfully selecting data with limit and offset', function () {
   });
 });
 
-describe('Successfully selecting one record', function () {
+describe('Successfully selecting one row', function () {
   var error     = false
     , result    = null
     , condition = { age: 30 };
