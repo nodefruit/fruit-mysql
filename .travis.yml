@@ -1,0 +1,12 @@
+sudo: false
+language: node_js
+node_js:
+  - '0.10'
+  - '0.12'
+  - '4'
+services:
+  - mysql
+before_script:
+  - npm install -g mocha
+  - mysql -e 'create database myapp_test;'
+script: HOST="localhost" DB="myapp_test" USER="root" PASS="" npm test
