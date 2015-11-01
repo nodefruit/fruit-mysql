@@ -85,7 +85,7 @@ module.exports = (function () {
       
       if(limit)   query += ' LIMIT '  + limit;
       if(offset)  {
-        if(!limit) query += ' LIMIT 18446744073709551610 '
+        if(!limit) query += ' LIMIT 18446744073709551610 ';
         query += ' OFFSET ' + offset;
       }
       
@@ -111,7 +111,7 @@ module.exports = (function () {
       
       exec(query, function (err, results) {
         callBack(err, err ? undefined : {
-          results : {
+          result : {
               success       : true
             , count         : results.affectedRows
             , affectedCount : results.changedRows
@@ -137,7 +137,7 @@ module.exports = (function () {
       
       exec(query, function (err, results) {
         callBack(err, err ? undefined : {
-          results : {
+          result : {
               success       : true
             , count         : results.affectedRows
             , affectedCount : results.affectedRows
