@@ -1,4 +1,4 @@
-![Fruit](https://github.com/nodefruit/fruit-mysql/raw/master/pres/logo.png)
+[![Fruit](https://github.com/nodefruit/fruit-mysql/raw/master/pres/logo.png)][http://github.com/nodefruit/fruit-mysql]
 
 [![CI Buimd][build-image]][build-url]
 [![Dependencied][dependencies-image]][dependencies-url]
@@ -38,7 +38,7 @@ The `multipleStatements` option is optional. If you need to get correct argument
     .error(errorCallBack);
 ```
 
-[build-image]: https://api.travis-ci.org/nodefruit/fruit.svg
+[build-image]: https://api.travis-ci.org/nodefruit/fruit-mysql.svg
 [build-url]: https://github.com/nodefruit/fruit-mysql
 [stability-image]: https://img.shields.io/badge/stability-experimental-orange.svg
 [stability-url]: https://github.com/nodefruit/fruit-mysql
