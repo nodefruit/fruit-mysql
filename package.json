@@ -1,6 +1,6 @@
 {
   "name": "fruit-mysql",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "MySQL Fruit ORM adapter",
   "main": "fruit-mysql.js",
   "scripts": {
