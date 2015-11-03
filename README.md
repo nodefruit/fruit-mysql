@@ -37,6 +37,19 @@ The `multipleStatements` option is optional. If you need to get correct argument
     .success(successCallBack)
     .error(errorCallBack);
 ```
+### Contributing
+
+All contributions are welcome. Let's get this project to the next level.
+Significant and valuable contributions will allow you to be part of [Fruit organisation](http://github.com/nodefruit).
+See the [contribution guide](http://github.com/nodefruit/fruit/blob/master/CONTRIBUTING.md) for more details
+
+### Community
+
+If you'd like to chat and discuss this project, you can find us here:
+
+- Mailing list: https://groups.google.com/forum/#!forum/nodefruit
+- [![Join the chat at https://gitter.im/nodefruit/fruit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nodefruit/fruit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [logo]: https://github.com/nodefruit/fruit-mysql/raw/master/pres/logo.png
 [repo-link]: https://github.com/nodefruit/fruit-mysql
 [build-image]: https://api.travis-ci.org/nodefruit/fruit-mysql.svg
