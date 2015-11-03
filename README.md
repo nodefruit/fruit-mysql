@@ -1,4 +1,4 @@
-[![Fruit][logo]][reo-link]
+[![Fruit][logo]][repo-link]
 
 [![CI Buimd][build-image]][build-url]
 [![Dependencied][dependencies-image]][dependencies-url]
