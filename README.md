@@ -1,4 +1,4 @@
-[![Fruit](https://github.com/nodefruit/fruit-mysql/raw/master/pres/logo.png)][http://github.com/nodefruit/fruit-mysql]
+[![Fruit](https://github.com/nodefruit/fruit-mysql/raw/master/pres/logo.png)]][http://github.com/nodefruit/fruit-mysql]
 
 [![CI Buimd][build-image]][build-url]
 [![Dependencied][dependencies-image]][dependencies-url]
